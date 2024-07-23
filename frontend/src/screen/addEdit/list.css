@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .wrapper {
+    display: flex;
+    flex: 1;
+  }
+  .sidebar {
+    min-width: 250px;
+  }
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  footer {
+    background: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  }

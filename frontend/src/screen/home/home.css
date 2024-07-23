@@ -1,0 +1,55 @@
+/* body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  .wrapper {
+    display: flex;
+    flex: 1;
+  }
+  .sidebar {
+    min-width: 250px;
+  }
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  footer {
+    background: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  } */
+
+  /* Banner.css */
+.banner-container {
+  background-image: url('../../assests/banner1.jpg'); /* Path to your background image */
+  background-size: cover;
+  background-position: center;
+  height: 88vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Text color to contrast with the background */
+}
+
+.banner-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.banner-description {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: #000;
+
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+}
+
+.product-card {
+    margin-bottom: 30px;
+}
+
