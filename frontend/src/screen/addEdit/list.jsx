@@ -48,7 +48,9 @@ const List = () => {
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Item</th>
+                      <th>Product Name</th>
+                      <th>Category</th>
+                      <th>Product Image</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -57,6 +59,8 @@ const List = () => {
                   <tr key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
+                    <td>{item?.category?.name}</td>
+                    <td><img width={'30%'} src={item?.photo[0]} alt="" /></td>
                     <td>
                       <button onClick={() => navigate(`/add/${item.slug}`)} className="btn btn-sm btn-primary">Edit</button>
                       <button onClick={() => handleDelete(item._id)} className="btn btn-sm btn-danger">Delete</button>

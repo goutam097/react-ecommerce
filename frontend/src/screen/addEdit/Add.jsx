@@ -6,6 +6,8 @@ import {
   getCategory,
 } from "../../api";
 import { useNavigate, useParams } from "react-router-dom";
+import { IoMdCloseCircle } from "react-icons/io";
+
 
 const Add = () => {
   const navigate = useNavigate();
@@ -201,11 +203,12 @@ const Add = () => {
         </div>
         {formData.previewPhoto && (
           <div className="form-group">
-            <img
+            <img 
               src={formData.previewPhoto}
               alt="Preview"
               style={{ maxHeight: "200px" }}
             />
+           <IoMdCloseCircle />
           </div>
         )}
         <div className="form-group form-check">
@@ -226,118 +229,6 @@ const Add = () => {
     </div>
   );
 
-  // return (
-  //   <div className="container mt-5">
-  //     <h2>Contact Form</h2>
-  //     <form onSubmit={handleSubmit}>
-  //       <div className="form-group">
-  //         <label htmlFor="name">Name</label>
-  //         <input
-  //           type="text"
-  //           className="form-control"
-  //           id="name"
-  //           name="name"
-  //           value={formData.name}
-  //           onChange={handleChange}
-  //           placeholder="Enter your name"
-  //           required
-  //         />
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="email">Price</label>
-  //         <input
-  //           type="number"
-  //           className="form-control"
-  //           id="price"
-  //           name="price"
-  //           value={formData.price}
-  //           onChange={handleChange}
-  //           placeholder="Enter your price"
-  //           required
-  //         />
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="category">Category</label>
-  //         <select
-  //           className="form-control"
-  //           id="category"
-  //           name="category"
-  //           value={formData.category}
-  //           onChange={handleChange}
-  //           required
-  //         >
-  //           <option value="">Select a category</option>
-  //           {categories.map((category) => (
-  //             <option key={category._id} value={category._id}>
-  //               {category.name}
-  //             </option>
-  //           ))}
-  //         </select>
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="address">Description</label>
-  //         <textarea
-  //           className="form-control"
-  //           id="description"
-  //           name="description"
-  //           rows="3"
-  //           value={formData.description}
-  //           onChange={handleChange}
-  //           placeholder="Enter your description"
-  //           required
-  //         />
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="email">Quantity</label>
-  //         <input
-  //           type="number"
-  //           className="form-control"
-  //           id="quantity"
-  //           name="quantity"
-  //           value={formData.quantity}
-  //           onChange={handleChange}
-  //           placeholder="Enter your quantity"
-  //           required
-  //         />
-  //       </div>
-  //       <div className="form-group">
-  //         <label htmlFor="photo">Choose Image</label>
-  //         <input
-  //           type="file"
-  //           className="form-control"
-  //           id="photo"
-  //           name="photo"
-  //           accept="image/jpg,image/jpeg,image/png"
-  //           onChange={handleChange}
-  //           required
-  //         />
-  //       </div>
-  //       {formData.photoPreview && (
-  //         <div className="form-group">
-  //           <img
-  //             src={formData.photoPreview}
-  //             alt="Preview"
-  //             style={{ maxHeight: "200px" }}
-  //           />
-  //         </div>
-  //       )}
-  //       <div className="mb-3">
-  //         <label htmlFor="shipping" className="form-label">
-  //           Shipping
-  //         </label>
-  //         <input
-  //           type="checkbox"
-  //           className="form-check-input"
-  //           id="shipping"
-  //           defaultChecked
-  //         />
-  //       </div>
-  //       <button type="submit" className="btn btn-primary">
-  //         Submit
-  //       </button>
-  //     </form>
-  //   </div>
-  // );
-};
+ };
 
 export default Add;

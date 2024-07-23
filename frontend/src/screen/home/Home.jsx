@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./home.css";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
+import { getProduct } from '../../api';
+
 
 const Home = () => {
   const imagePath = require('../../assests/banner1.jpg');
   const navigate = useNavigate();
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetchItems();
+  }, []);
+  
+
+  const fetchItems = async () => {
+    const response = await getProduct();
+    setItems(response.data.products);
+  };
 
 
   return (
@@ -32,23 +46,26 @@ const Home = () => {
         <section className="container my-5">
           <h2 className="text-center mb-4">Featured Products</h2>
           <div className="row">
+          {items.map((item, index) => (
             <div className="col-md-4">
-              <div className="card product-card" onClick={() => navigate(`/product-details`)}>
+              <div className="card product-card" onClick={() => navigate(`/product-details/${item.slug}`)}>
                 <img
-                  src="https://via.placeholder.com/300x200"
+                  src={item?.photo[0]}
                   className="card-img-top"
                   alt="Product 1"
                 />
                 <div className="card-body">
-                  <h5 className="card-title">Product 1</h5>
-                  <p className="card-text">$29.99</p>
-                  <a href="#" className="btn btn-primary">
-                    Buy Now
+                  <h5 className="card-title">{item.name}</h5>
+                  <p className="card-text">${item.price}</p>
+                  <a  className="btn btn-primary">
+                    Get Details
                   </a>
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+                ))}
+
+            {/* <div className="col-md-4">
               <div className="card product-card">
                 <img
                   src="https://via.placeholder.com/300x200"
@@ -79,7 +96,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 

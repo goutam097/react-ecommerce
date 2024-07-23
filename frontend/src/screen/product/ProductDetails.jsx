@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getProductItem,
+} from "../../api";
 
 const ProductDetails = () => {
+  const navigate = useNavigate();
+
+  const { slug } = useParams();
+  const [formData, setFormData] = useState()
+
+  useEffect(() => {
+    if (slug) {
+      fetchDetails();
+    }
+  }, [slug]);
+
+  const fetchDetails = async () => {
+    try {
+      const response = await getProductItem(slug);
+      const details = response?.data?.product;
+      if (response && details) {
+        setFormData({
+          name: details?.name || "",
+          price: details?.price || "",
+          phone: details?.phone || "",
+          description: details?.description || "",
+          quantity: details?.quantity || "",
+          photo: details?.photo || "",
+          category: details?.category.name || "",
+          shipping: details?.shipping || "",
+          id: details?._id || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching details:", error);
+    }
+  };
+
   return (
     <div>
       <Header />
