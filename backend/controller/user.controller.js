@@ -1,6 +1,4 @@
-// const { hashPassword, comparePassword } from "../helpers/authHelper.js";
-// const userModel from "../model/user.model.js";
-// const JWT from 'jsonwebtoken';
+
 const userModel = require("../model/user.model");
 const JWT = require('jsonwebtoken')
 
@@ -92,7 +90,93 @@ const login = async (req, res) => {
     }
 }
 
+const allUsers = async(req,res)=>{
+    try{
+        console.log("userid all Users",req.userId)
+
+        const allUsers = await userModel.find()
+        
+        res.json({
+            message : "All User ",
+            data : allUsers,
+            success : true,
+            error : false
+        })
+    }catch(err){
+        res.status(400).json({
+            message : err.message || err,
+            error : true,
+            success : false
+        })
+    }
+}
+
+const userDetailsController = async(req,res) => {
+    try{
+        const userId = req.query.userId;
+        console.log("userId",userId)
+        const user = await userModel.findById(userId)
+        // console.log("userId",req.userId)
+        // const user = await userModel.findById(req.userId)
+
+        res.status(200).json({
+            data : user,
+            error : false,
+            success : true,
+            message : "User details"
+        })
+
+        console.log("user",user)
+
+    }catch(err){
+        res.status(400).json({
+            message : err.message || err,
+            error : true,
+            success : false
+        })
+    }
+}
+
+const updateUser = async (req,res)=>{
+    try{
+        const sessionUser = req.userId
+
+        const { userId , email, name, role} = req.body
+
+        const payload = {
+            ...( email && { email : email}),
+            ...( name && { name : name}),
+            ...( role && { role : role}),
+        }
+
+        const user = await userModel.findById(sessionUser)
+
+        console.log("user.role",user.role)
+
+
+
+        const updateUser = await userModel.findByIdAndUpdate(userId,payload)
+
+        
+        res.json({
+            data : updateUser,
+            message : "User Updated",
+            success : true,
+            error : false
+        })
+    }catch(err){
+        res.status(400).json({
+            message : err.message || err,
+            error : true,
+            success : false
+        })
+    }
+}
+
 module.exports = { 
     register,
-    login
+    login,
+    allUsers,
+    userDetailsController,
+    updateUser
     };

@@ -11,6 +11,7 @@ import CreateCategory from './screen/admin/category/CreateCategory';
 import CategoryList from './screen/admin/category/CategoryList';
 import Dashboard from './screen/admin/dashboard/Dashboard';
 import ProductDetails from './screen/product/ProductDetails';
+import CartList from './screen/cart/CartList';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ProtectedRoute element={Home} />} />
           <Route path='/product-details/:slug' element={<ProtectedRoute element={ProductDetails} />} />
+          <Route path='/cart-list' element={<ProtectedRoute element={CartList} />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
 

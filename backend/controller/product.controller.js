@@ -145,8 +145,16 @@ const getProductController = async (req, res) => {
 // get single product 
 const getSingleProductController = async (req, res) => {
     try {
-        const product = await productModel.findOne({ slug: req.params.slug }).select("-photo").populate("category")
-
+        // let product = await productModel.findOne({ slug: req.params.slug }).select("-photo").populate("category")
+        let product = await productModel.findOne({ slug: req.params.slug }).populate("category")
+        if (product && product.photo) {
+            product.photo = product.photo.map(path => `${baseUrl}/${path.replace(/\\/g, '/')}`);
+        }
+        // product = product.map(product => {
+        //     const normalizedPhotoPaths = product.photo.map(path => path.replace(/\\/g, '/'));
+        //     product.photo = normalizedPhotoPaths.map(path => `${baseUrl}/${path}`);
+        //     return product;
+        // });
         return res.status(200).send({
             success: true,
             message: 'single products fetched',
@@ -185,7 +193,35 @@ const productPhotoController = async (req, res) => {
     }
 }
 
+
+// const productPhotoController = async (req, res) => {
+//     try {
+//         const product = await productModel.findById(req.params.pid).select("photo");
+
+//         if (product && product.photo && product.photo.data) {
+//             const normalizedPhotoPath = `${baseUrl}/${product.photo.data.replace(/\\/g, '/')}`;
+//             res.set('Content-Type', product.photo.contentType);
+//             return res.status(200).send(normalizedPhotoPath);
+//         } else {
+//             return res.status(404).send({
+//                 success: false,
+//                 message: "Photo not found",
+//             });
+//         }
+
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).send({
+//             success: false,
+//             message: "Error while getting photo",
+//             error: error.message
+//         });
+//     }
+// }
+
 // delete product
+
+
 const productDeleteController = async (req, res) => {
     try {
         await productModel.findByIdAndDelete(req.params.pid).select("-photo")
